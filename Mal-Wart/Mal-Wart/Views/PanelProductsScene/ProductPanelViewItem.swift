@@ -1,5 +1,5 @@
 //
-//  ProductPanelView.swift
+//  ProductPanelViewItem.swift
 //  Created 8/4/20
 //  Using Swift 5.0
 // 
@@ -29,7 +29,7 @@ struct ProductAddButton: View {
     }
 }
 
-struct ProductPanelView: View {
+struct ProductPanelViewItem: View {
     
     /// for debugging
     @State var showBorder: Bool = false
@@ -60,8 +60,8 @@ struct ProductPanelView: View {
     }
 }
 
-struct ProductPanelView_Previews: PreviewProvider {
+struct ProductPanelViewItem_Previews: PreviewProvider {
     static var previews: some View {
-        ProductPanelView(product: SampleProducts.bread.makeProduct())
+        ProductPanelViewItem(product: SampleProducts.bread.makeProduct())
     }
 }

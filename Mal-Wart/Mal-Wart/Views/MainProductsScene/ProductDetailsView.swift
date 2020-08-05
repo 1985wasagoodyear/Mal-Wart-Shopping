@@ -15,17 +15,20 @@ struct ProductDetailsView: View {
     var product: Product
     
     var body: some View {
-        NavigationView {
+        ScrollView(.vertical, showsIndicators: true) {
             VStack {
                 Image(product.images[0].type)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .padding(8.0)
                     .accessibility(identifier: product.images[0].imageName)
                 Text(product.name)
                 Text(PriceFormatter.currencyText(double: product.price))
+                    .padding(.bottom, 8.0)
+                Text(product.productFeatures)
+                    .padding(.bottom, 20.0)
             }
-        }.edgesIgnoringSafeArea(.all)
+            .padding(8.0)
+        }
     }
 }
 

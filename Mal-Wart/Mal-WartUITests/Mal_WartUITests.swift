@@ -10,7 +10,7 @@
 
 import XCTest
 
-class Mal_WartUITests: XCTestCase {
+final class Mal_WartUITests: XCTestCase {
 
     let app = XCUIApplication()
     
@@ -75,7 +75,6 @@ class Mal_WartUITests: XCTestCase {
         XCTAssertFalse(sugarLoafButton.exists)
         XCTAssert(sugarLoafText.exists)
         XCTAssert(sugarLoafImage.exists)
-        
     }
 
 }
