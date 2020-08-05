@@ -32,7 +32,7 @@ struct ProductAddButton: View {
 struct ProductPanelView: View {
     
     /// for debugging
-    @State var showBorder: Bool = true
+    @State var showBorder: Bool = false
     var product: Product
     
     var body: some View {
@@ -45,7 +45,8 @@ struct ProductPanelView: View {
             VStack(alignment: .leading) {
                 HStack(alignment: .center, spacing: 0.0) {
                     Text(PriceFormatter.currencyText(double: product.price))
-                    Text(product.unitPrice.text).foregroundColor(.gray)
+                    Text(product.unitPrice.text)
+                        .foregroundColor(.gray)
                 }
                 Text(product.name)
                     .padding(.bottom, 16)

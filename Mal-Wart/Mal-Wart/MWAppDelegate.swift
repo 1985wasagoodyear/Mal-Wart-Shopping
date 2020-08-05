@@ -10,11 +10,25 @@
 
 import UIKit
 
+extension UIWindow {
+    static var key: UIWindow? {
+        if #available(iOS 13, *) {
+            return UIApplication.shared.windows.first { $0.isKeyWindow }
+        } else {
+            return UIApplication.shared.keyWindow
+        }
+    }
+}
+
 @UIApplicationMain
 class MWAppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        https://stackoverflow.com/questions/37282350/how-to-speed-up-ui-test-cases-in-xcode
+        if ProcessInfo.processInfo.arguments.contains("UITests") {
+            UIWindow.key?.layer.speed = 100
+        }
         return true
     }
 

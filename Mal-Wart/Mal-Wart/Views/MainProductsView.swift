@@ -15,7 +15,11 @@ struct MainProductsView: View {
     @State var products: [Product] = {
         [SampleProducts.bread.makeProduct(),
          SampleProducts.bread.makeProduct(name: "Whole Wheat Bread"),
-         SampleProducts.bread.makeProduct(name: "Sugar Loaf")]
+         SampleProducts.bread.makeProduct(name: "Sugar Loaf"),
+         SampleProducts.bread.makeProduct(name: "Gluten-free"),
+         SampleProducts.bread.makeProduct(name: "Rye"),
+         SampleProducts.bread.makeProduct(name: "Half-and-half"),
+         SampleProducts.bread.makeProduct(name: "Pre-toasted")]
     }()
     
     var body: some View {
@@ -23,8 +27,9 @@ struct MainProductsView: View {
             List(products) { product in
                 NavigationLink(destination: ProductDetailsView(product: product)) {
                     MainProductRow(product: product)
-                }
+                }.accessibility(identifier: product.name)
             }
+            .navigationBarTitle("Bread Aisle")
         }
     }
 }

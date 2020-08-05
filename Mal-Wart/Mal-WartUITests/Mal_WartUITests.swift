@@ -12,34 +12,70 @@ import XCTest
 
 class Mal_WartUITests: XCTestCase {
 
+    let app = XCUIApplication()
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app.terminate()
+    }
+    
+    func testCanEnter_BreadAisle() {
+        let breadQuery = app.staticTexts["Bread Aisle"]
+        XCTAssert(breadQuery.exists)
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testCanFind_CellWith_BreadInLabel() {
+        let tablesQuery = app.tables
+        let predicate = NSPredicate(format: "label CONTAINS %@", "Bread")
+        let breadQuery = tablesQuery.cells.containing(predicate).firstMatch
+        XCTAssert(breadQuery.exists)
+    }
+    
+    func testCanFind_FirstBreadCell() {
+        let breadQuery = app.buttons.matching(identifier: "Bread").firstMatch
+        XCTAssert(breadQuery.exists)
+    }
+    
+    func testCanFind_LastBreadCell() {
+        let breadQuery = app.buttons.matching(identifier: "Pre-toasted").firstMatch
+        app.swipeUp()
+        XCTAssert(breadQuery.exists)
+    }
+    
+    func testCanView_SugarLoaf_DetailsScreen() {
+        // first-screen items
+        let breadQuery = app.buttons.matching(identifier: "Bread").firstMatch
+        let sugarLoafButton = app.buttons.matching(identifier: "Sugar Loaf").firstMatch
+        // detail screen items
+        let sugarLoafText = app.staticTexts["Sugar Loaf"]
+        let sugarLoafImage = app.images["bread"]
+        
+        // assert the first-screen's items are present
+        // and the details screen's items are not-yet visible
+        XCTAssert(breadQuery.exists)
+        XCTAssert(sugarLoafButton.exists)
+        XCTAssertFalse(sugarLoafText.exists)
+        XCTAssertFalse(sugarLoafImage.exists)
+        
+        // tap
+        sugarLoafButton.tap()
+        
+        // wait for animations to finish
+        let exists = NSPredicate(format: "exists == 1")
+        expectation(for: exists, evaluatedWith: sugarLoafText, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        // assert that first-screen is gone
+        // but the detail screen's elements now exist
+        XCTAssertFalse(breadQuery.exists)
+        XCTAssertFalse(sugarLoafButton.exists)
+        XCTAssert(sugarLoafText.exists)
+        XCTAssert(sugarLoafImage.exists)
+        
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTOSSignpostMetric.applicationLaunch]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
 }
