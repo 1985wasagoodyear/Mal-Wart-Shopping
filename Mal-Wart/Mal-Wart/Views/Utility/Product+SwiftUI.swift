@@ -19,7 +19,7 @@ struct PriceFormatter {
     }()
     
     static func currencyText(double: Double) -> String {
-        let nsNumber = NSNumber.init(value: double)
+        let nsNumber = NSNumber(value: double)
         return formatter.string(from: nsNumber) ?? String(format: "$%.2f", double)
     }
 }

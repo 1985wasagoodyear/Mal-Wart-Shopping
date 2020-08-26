@@ -24,7 +24,7 @@ final class MWSceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         let window = UIWindow(windowScene: windowScene)
-        let contentView = ProductPanelView()
+        let contentView = MainProductsView() // ProductPanelView()
         window.rootViewController = UIHostingController(rootView: contentView)
         self.window = window
         window.makeKeyAndVisible()

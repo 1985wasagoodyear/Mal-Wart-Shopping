@@ -145,6 +145,7 @@
 				3F1D680924D98CB600D81841 /* Utility */,
 				3F1D680624D98C7800D81841 /* PanelProductsScene */,
 				3FC4BCE124DB38320050D37B /* MainProductsScene */,
+				3FCC3B9924F6A2CD0085BAAC /* ProductDetailsScene */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -163,9 +164,16 @@
 			children = (
 				3F5E3DC224D84E8C002AF8C1 /* MainProductsView.swift */,
 				3F5E3DE724D8AD13002AF8C1 /* MainProductRow.swift */,
-				3F1D680424D9870000D81841 /* ProductDetailsView.swift */,
 			);
 			path = MainProductsScene;
+			sourceTree = "<group>";
+		};
+		3FCC3B9924F6A2CD0085BAAC /* ProductDetailsScene */ = {
+			isa = PBXGroup;
+			children = (
+				3F1D680424D9870000D81841 /* ProductDetailsView.swift */,
+			);
+			path = ProductDetailsScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

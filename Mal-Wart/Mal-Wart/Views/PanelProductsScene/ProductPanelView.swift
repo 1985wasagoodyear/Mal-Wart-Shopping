@@ -25,10 +25,10 @@ struct ProductPanelView: View {
     var body: some View {
         NavigationView {
             List(products) { product in
-                NavigationLink(destination: ProductDetailsView(product: product)) {
-                    ProductPanelViewItem(showBorder: true, product: product)
-                }.accessibility(identifier: product.name)
-            }
+                ProductPanelViewItem(showBorder: true, product: product)
+                    .accessibility(identifier: product.name)
+
+                }
             .navigationBarTitle("Bread Aisle")
         }
     }
